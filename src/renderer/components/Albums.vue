@@ -44,6 +44,12 @@
     },
     mounted() {
       if (!this.albums.length) this.getAlbums();
+      const app = document.getElementById('app');
+      window.addEventListener('scroll', () => {
+        if ((window.innerHeight + window.pageYOffset) >= app.offsetHeight) {
+          this.getAlbums();
+        }
+      });
     },
   };
 </script>

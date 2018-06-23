@@ -1,6 +1,6 @@
 <template>
   <div class="columns">
-    <div class="column is-one-fifth">
+    <div class="column is-one-fifth" style="position: fixed; z-index: 1000; width: 200px;">
       <aside class="menu box">
         <p class="menu-label">Jamendo</p>
         <ul class="menu-list">
@@ -11,7 +11,7 @@
       </aside>
       <AudioPlayer />
     </div>
-    <div class="column">
+    <div class="column" style="margin-left: 200px;">
       <transition name="fade" mode="out-in">
         <router-view />
       </transition>
