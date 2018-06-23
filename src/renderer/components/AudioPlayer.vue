@@ -6,6 +6,14 @@
           <img :src="album.image">
         </figure>
       </div>
+      <progress
+        :value="progress"
+        class="progress is-primary is-small"
+        max="100"
+        style="height: 6px; border-radius: 0; margin: 0;"
+        />
+      <small class="is-pulled-left">{{ timeElapsed | digiClock }}</small>
+      <small class="is-pulled-right">{{ parseInt(currentlyPlaying.duration, 10) | digiClock }}</small>
       <div style="padding-top: 12px; padding-bottom: 12px;">
         <div class="has-text-centered has-text-weight-bold">{{ currentlyPlaying.name }}</div>
         <div class="has-text-centered" style="margin-bottom: 6px;">{{ album.artist_name }}</div>
@@ -31,6 +39,7 @@
           :paused="paused"
           @paused="paused = true"
           @played="paused = false"
+          @timeupdate="timeupdate"
           />
       </div>
     </div>
@@ -49,6 +58,8 @@
     data() {
       return {
         paused: false,
+        progress: 0,
+        timeElapsed: 0,
       };
     },
     computed: {
@@ -66,6 +77,8 @@
     watch: {
       currentlyPlaying(track) {
         /* eslint-disable no-new */
+        this.progress = 0;
+        this.timeElapsed = 0;
         new Notification(track.name, {
           icon: this.album.image,
           body: this.album.artist_name,
@@ -80,6 +93,18 @@
       },
       resume() {
         this.paused = false;
+      },
+      timeupdate(progress) {
+        this.progress = progress;
+        this.timeElapsed = this.timeElapsed + 1;
+      },
+    },
+    filters: {
+      digiClock(val) {
+        const time = parseInt(val, 10);
+        const minute = Math.floor(time / 60);
+        const second = time % 60;
+        return `${minute < 10 ? '0' : ''}${minute}:${second < 10 ? '0' : ''}${second}`;
       },
     },
   };

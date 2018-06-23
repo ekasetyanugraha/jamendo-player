@@ -33,6 +33,7 @@
           <tr>
             <th style="width: 24px">No</th>
             <th>Title</th>
+            <th>Duration</th>
             <th>
               <a class="button is-link" @click.prevent="playAll(tracks)">
                 <span>Play All</span>
@@ -47,9 +48,13 @@
           <tr v-for="track in tracks" :key="track.id" :class="{'is-selected': track.id === currentlyPlaying.id}">
             <td>{{ track.position }}</td>
             <td>{{ track.name }}</td>
+            <td>{{ track.duration | digiClock }}</td>
             <td>
               <a class="icon" @click.prevent="play(track)">
                 <i class="fas fa-lg fa-play-circle"></i>
+              </a>
+              <a class="icon" @click.prevent="addToQueue(track)">
+                <i class="fas fa-lg fa-plus-circle"></i>
               </a>
             </td>
           </tr>
@@ -91,6 +96,12 @@
     filters: {
       year(val) {
         return new Date(val).getFullYear();
+      },
+      digiClock(val) {
+        const time = parseInt(val, 10);
+        const minute = Math.floor(time / 60);
+        const second = time % 60;
+        return `${minute < 10 ? '0' : ''}${minute}:${second < 10 ? '0' : ''}${second}`;
       },
     },
     mounted() {
