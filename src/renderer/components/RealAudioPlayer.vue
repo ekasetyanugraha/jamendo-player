@@ -1,5 +1,5 @@
 <template>
-  <audio :src="audio" id="player" controls style="display: none"></audio>
+  <audio :src="audio" id="player" style="display: none"></audio>
 </template>
 
 <script>
@@ -38,8 +38,9 @@
       audioElement.addEventListener('ended', this.onEnded);
       clearInterval(this.interval);
       this.interval = setInterval(() => {
-        const progress = (audioElement.currentTime / audioElement.duration) * 100;
-        if (!isNaN(progress)) this.$emit('timeupdate', progress);
+        const { currentTime, duration } = audioElement;
+        const progress = (currentTime / duration) * 100;
+        if (!isNaN(progress)) this.$emit('timeupdate', { progress, currentTime });
       }, 1000);
       audioElement.load();
     },

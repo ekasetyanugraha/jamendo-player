@@ -12,11 +12,12 @@
         max="100"
         style="height: 6px; border-radius: 0; margin: 0;"
         />
-      <small class="is-pulled-left">{{ timeElapsed | digiClock }}</small>
+      <small class="is-pulled-left">{{ currentTime | digiClock }}</small>
       <small class="is-pulled-right">{{ parseInt(currentlyPlaying.duration, 10) | digiClock }}</small>
-      <div style="padding-top: 12px; padding-bottom: 12px;">
-        <div class="has-text-centered has-text-weight-bold">{{ currentlyPlaying.name }}</div>
-        <div class="has-text-centered" style="margin-bottom: 6px;">{{ album.artist_name }}</div>
+      <div class="is-clearfix"></div>
+      <div style="padding-top: 12px; padding-bottom: 12px; padding-left: 6px; padding-right: 6px">
+        <div class="has-text-centered has-text-weight-bold ellipsis">{{ currentlyPlaying.name }}</div>
+        <div class="has-text-centered ellipsis" style="margin-bottom: 6px;">{{ album.artist_name }}</div>
         <div class="level" style="margin: 0;">
           <div class="level-item has-text-centered">
             <a class="icon is-large" @click="playPrev">
@@ -59,7 +60,7 @@
       return {
         paused: false,
         progress: 0,
-        timeElapsed: 0,
+        currentTime: 0,
       };
     },
     computed: {
@@ -78,7 +79,7 @@
       currentlyPlaying(track) {
         /* eslint-disable no-new */
         this.progress = 0;
-        this.timeElapsed = 0;
+        this.currentTime = 0;
         new Notification(track.name, {
           icon: this.album.image,
           body: this.album.artist_name,
@@ -94,9 +95,11 @@
       resume() {
         this.paused = false;
       },
-      timeupdate(progress) {
-        this.progress = progress;
-        this.timeElapsed = this.timeElapsed + 1;
+      timeupdate({ progress, currentTime }) {
+        if (!this.paused) {
+          this.progress = progress;
+          this.currentTime = currentTime;
+        }
       },
     },
     filters: {

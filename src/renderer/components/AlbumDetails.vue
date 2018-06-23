@@ -47,7 +47,7 @@
         <tbody>
           <tr v-for="track in tracks" :key="track.id" :class="{'is-selected': track.id === currentlyPlaying.id}">
             <td>{{ track.position }}</td>
-            <td>{{ track.name }}</td>
+            <td class="ellipsis">{{ track.name }}</td>
             <td>{{ track.duration | digiClock }}</td>
             <td>
               <a class="icon" @click.prevent="play(track)">

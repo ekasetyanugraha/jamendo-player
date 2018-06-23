@@ -31,6 +31,11 @@
 </script>
 
 <style>
+  .ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
   .fade-enter-active, .fade-leave-active {
     transition: opacity .2s;
   }
