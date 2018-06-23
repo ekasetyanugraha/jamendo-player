@@ -66,10 +66,8 @@
     watch: {
       currentlyPlaying(track) {
         /* eslint-disable no-new */
-        new Notification({
+        new Notification(track.name, {
           icon: this.album.image,
-          title: track.name,
-          subtitle: `${this.album.name} (${this.album.releasedate.split('-')[0]})`,
           body: this.album.artist_name,
           silent: true,
         });
