@@ -6,9 +6,38 @@
           <img :src="album.image">
         </figure>
       </div>
+      <div class="has-text-centered has-text-weight-bold">{{ currentlyPlaying.name }}</div>
+      <div class="has-text-centered">{{ album.artist_name }}</div>
+      <div v-if="!paused" class="level">
+        <div class="level-item has-text-centered">
+          <a class="icon is-large" @click="pause">
+            <i class="fas fa-2x fa-backward"></i>
+          </a>
+          <a class="icon is-large" @click="resume">
+            <i class="fas fa-3x fa-play-circle"></i>
+          </a>
+          <a class="icon is-large" @click="playNext">
+            <i class="fas fa-2x fa-forward"></i>
+          </a>
+        </div>
+      </div>
+      <div v-else class="level">
+        <div class="level-item has-text-centered">
+          <a class="icon is-large" @click="pause">
+            <i class="fas fa-2x fa-backward"></i>
+          </a>
+          <a class="icon is-large" @click="pause">
+            <i class="fas fa-3x fa-pause-circle"></i>
+          </a>
+          <a class="icon is-large" @click="playNext">
+            <i class="fas fa-2x fa-forward"></i>
+          </a>
+        </div>
+      </div>
       <RealAudioPlayer
         :audio="currentlyPlaying.audio"
         :onEnded="playNext"
+        :paused="paused"
         />
     </div>
   </transition>
@@ -22,6 +51,11 @@
     name: 'AudioPlayer',
     components: {
       RealAudioPlayer,
+    },
+    data() {
+      return {
+        paused: false,
+      };
     },
     computed: {
       ...mapState({
@@ -37,6 +71,12 @@
     },
     methods: {
       ...mapActions(['play', 'playNext', 'playAll']),
+      pause() {
+        this.paused = true;
+      },
+      resume() {
+        this.paused = false;
+      },
     },
   };
 </script>

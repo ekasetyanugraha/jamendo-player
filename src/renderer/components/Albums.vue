@@ -1,5 +1,5 @@
 <template>
-  <transition-group name="list" tag="div" class="columns is-multiline">
+  <div class="columns is-multiline" ref="ancestor">
     <div v-for="album in albums" :key="album.id" class="column is-one-fifth">
       <div class="card">
         <div class="card-image">
@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-  </transition-group>
+  </div>
 </template>
 
 <script>
@@ -26,6 +26,12 @@
     },
     methods: {
       ...mapActions(['getAlbums', 'getAlbumTracks']),
+      getMoreAlbums() {
+        const el = document.getElementById('app');
+        if (el.scrollTop + el.clientHeight >= el.scrollHeight) {
+          this.getAlbums();
+        }
+      },
       goToAlbumTracks(albumId) {
         this.$router.push({
           name: 'album_tracks',
@@ -36,7 +42,9 @@
       },
     },
     mounted() {
-      this.getAlbums();
+      if (!this.albums.length) this.getAlbums();
+      else this.getMoreAlbums();
+      document.getElementById('app').addEventListener('scroll', this.getMoreAlbums);
     },
   };
 </script>

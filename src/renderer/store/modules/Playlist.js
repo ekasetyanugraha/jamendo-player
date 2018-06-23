@@ -5,7 +5,6 @@ const state = {
 
 const mutations = {
   SET_QUEUE(state, queue) {
-    state.queue = [];
     state.queue = queue;
     state.currentlyPlaying = state.queue[0];
   },
@@ -13,7 +12,6 @@ const mutations = {
     state.queue.push(track);
   },
   PLAY_NEXT(state) {
-    state.queue = [];
     state.queue = state.queue.slice(1);
     state.currentlyPlaying = state.queue[0];
   },

@@ -28,7 +28,7 @@
             <th style="width: 24px">No</th>
             <th>Title</th>
             <th>
-              <a class="button is-primary" @click.prevent="playAll(tracks)">
+              <a class="button is-link" @click.prevent="playAll(tracks)">
                 <span>Play All</span>
                 <span class="icon" style="margin-left: 6px;">
                   <i class="fas fa-play"></i>
