@@ -9,7 +9,13 @@ const mutations = {
     state.currentlyPlaying = state.queue[0];
   },
   ADD_TO_QUEUE(state, track) {
-    state.queue.push(track);
+    const found = state.queue.find(qTrack => qTrack.id === track.id);
+    if (!found) {
+      state.queue = [
+        ...state.queue,
+        track,
+      ];
+    }
   },
   PLAY_PREV(state) {
     const currentIndex = state.queue.findIndex(track => track.id === state.currentlyPlaying.id);
