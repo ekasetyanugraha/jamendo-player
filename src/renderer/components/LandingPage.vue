@@ -11,12 +11,10 @@
           </li>
         </ul>
       </aside>
-      <div>
-        <AudioPlayer />
-      </div>
+      <AudioPlayer />
     </div>
     <div class="column">
-      <transition name="fade">
+      <transition name="fade" mode="out-in">
         <router-view />
       </transition>
     </div>
@@ -33,3 +31,23 @@
     },
   };
 </script>
+
+<style>
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .2s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+  .list-item {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  .list-enter-active, .list-leave-active {
+    transition: all 1s;
+  }
+  .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+</style>

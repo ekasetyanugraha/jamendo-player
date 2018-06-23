@@ -1,22 +1,36 @@
 const state = {
   queue: [],
+  currentlyPlaying: {},
 };
 
 const mutations = {
   SET_QUEUE(state, queue) {
+    state.queue = [];
     state.queue = queue;
+    state.currentlyPlaying = state.queue[0];
   },
-  ADD_TO_QUEUE(state, audio) {
-    state.queue.push(audio);
+  ADD_TO_QUEUE(state, track) {
+    state.queue.push(track);
+  },
+  PLAY_NEXT(state) {
+    state.queue = [];
+    state.queue = state.queue.slice(1);
+    state.currentlyPlaying = state.queue[0];
   },
 };
 
 const actions = {
-  play({ commit }, audio) {
-    commit('SET_QUEUE', [audio]);
+  play({ commit }, track) {
+    commit('SET_QUEUE', [track]);
   },
-  addToQueue({ commit }, audio) {
-    commit('ADD_TO_QUEUE', audio);
+  playNext({ commit }) {
+    commit('PLAY_NEXT');
+  },
+  playAll({ commit }, tracks) {
+    commit('SET_QUEUE', tracks);
+  },
+  addToQueue({ commit }, track) {
+    commit('ADD_TO_QUEUE', track);
   },
 };
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="columns is-multiline">
+  <transition-group name="list" tag="div" class="columns is-multiline">
     <div v-for="album in albums" :key="album.id" class="column is-one-fifth">
       <div class="card">
         <div class="card-image">
@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </transition-group>
 </template>
 
 <script>
