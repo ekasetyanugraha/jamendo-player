@@ -12,8 +12,10 @@ const mutations = {
     state.queue.push(track);
   },
   PLAY_NEXT(state) {
-    state.queue = state.queue.slice(1);
-    state.currentlyPlaying = state.queue[0];
+    if (state.queue.length > 1) {
+      state.queue = state.queue.slice(1);
+      state.currentlyPlaying = state.queue[0];
+    }
   },
 };
 
