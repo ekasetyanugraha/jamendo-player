@@ -63,6 +63,14 @@
         return this.albums.find(album => album.tracks.filter(track => track.id === cpId).length > 0);
       },
     },
+    watch: {
+      currentlyPlaying(track) {
+        /* eslint-disable no-new */
+        new Notification(track.name, {
+          body: this.album.artist_name,
+        });
+      },
+    },
     methods: {
       ...mapActions(['play', 'playPrev', 'playNext', 'playAll']),
       pause() {

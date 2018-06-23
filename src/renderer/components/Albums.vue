@@ -33,6 +33,12 @@
     },
     methods: {
       ...mapActions(['getAlbums', 'getAlbumTracks']),
+      getMoreAlbums() {
+        const app = document.getElementById('app');
+        if ((window.innerHeight + window.pageYOffset) >= app.offsetHeight) {
+          this.getAlbums();
+        }
+      },
       goToAlbumTracks(albumId) {
         this.$router.push({
           name: 'album_tracks',
@@ -44,15 +50,10 @@
     },
     mounted() {
       if (!this.albums.length) this.getAlbums();
-      const app = document.getElementById('app');
-      window.addEventListener('scroll', () => {
-        if ((window.innerHeight + window.pageYOffset) >= app.offsetHeight) {
-          this.getAlbums();
-        }
-      });
+      window.addEventListener('scroll', this.getMoreAlbums);
     },
     destroyed() {
-      window.removeEventListener('scroll');
+      window.removeEventListener('scroll', this.getMoreAlbums);
     },
   };
 </script>
