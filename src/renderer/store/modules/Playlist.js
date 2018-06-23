@@ -11,10 +11,16 @@ const mutations = {
   ADD_TO_QUEUE(state, track) {
     state.queue.push(track);
   },
+  PLAY_PREV(state) {
+    const currentIndex = state.queue.findIndex(track => track.id === state.currentlyPlaying.id);
+    if (currentIndex > 0) {
+      state.currentlyPlaying = state.queue[currentIndex - 1];
+    }
+  },
   PLAY_NEXT(state) {
-    if (state.queue.length > 1) {
-      state.queue = state.queue.slice(1);
-      state.currentlyPlaying = state.queue[0];
+    const currentIndex = state.queue.findIndex(track => track.id === state.currentlyPlaying.id);
+    if (currentIndex < (state.queue.length - 1)) {
+      state.currentlyPlaying = state.queue[currentIndex + 1];
     }
   },
 };
@@ -22,6 +28,9 @@ const mutations = {
 const actions = {
   play({ commit }, track) {
     commit('SET_QUEUE', [track]);
+  },
+  playPrev({ commit }) {
+    commit('PLAY_PREV');
   },
   playNext({ commit }) {
     commit('PLAY_NEXT');

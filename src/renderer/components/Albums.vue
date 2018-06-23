@@ -1,17 +1,24 @@
 <template>
-  <div class="columns is-multiline" ref="ancestor">
-    <div v-for="album in albums" :key="album.id" class="column is-one-fifth">
-      <div class="card">
-        <div class="card-image">
-          <a @click.prevent="goToAlbumTracks(album.id)">
-            <figure class="image">
-              <img :src="album.image" :alt="album.name"/>
-            </figure>
-          </a>
+  <transition name="fade" mode="out-in">
+    <div class="columns is-multiline" v-if="albums.length">
+      <div v-for="album in albums" :key="album.id" class="column is-one-fifth">
+        <div class="card">
+          <div class="card-image">
+            <a @click.prevent="goToAlbumTracks(album.id)">
+              <figure class="image">
+                <img :src="album.image" :alt="album.name"/>
+              </figure>
+            </a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+    <div v-else class="has-text-centered">
+      <span class="icon is-large">
+        <i class="fas fa-3x fa-spinner fa-pulse"></i>
+      </span>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -26,12 +33,6 @@
     },
     methods: {
       ...mapActions(['getAlbums', 'getAlbumTracks']),
-      getMoreAlbums() {
-        const el = document.getElementById('app');
-        if (el.scrollTop + el.clientHeight >= el.scrollHeight) {
-          this.getAlbums();
-        }
-      },
       goToAlbumTracks(albumId) {
         this.$router.push({
           name: 'album_tracks',
@@ -43,8 +44,6 @@
     },
     mounted() {
       if (!this.albums.length) this.getAlbums();
-      else this.getMoreAlbums();
-      document.getElementById('app').addEventListener('scroll', this.getMoreAlbums);
     },
   };
 </script>

@@ -25,13 +25,14 @@ const actions = {
     if (!state.albums.length) {
       axios.get(`https://api.jamendo.com/v3.0/albums?client_id=8ab29b05&format=json&offset=${offset}&limit=${limit}&order=popularity_total`)
         .then(({ data }) => {
+          offset += limit;
           commit('SET_ALBUMS', data.results);
           return data;
         });
     } else {
-      offset += limit;
       axios.get(`https://api.jamendo.com/v3.0/albums?client_id=8ab29b05&format=json&offset=${offset}&limit=${limit}&order=popularity_total`)
         .then(({ data }) => {
+          offset += limit;
           commit('ADD_ALBUMS', data.results);
           return data;
         });

@@ -1,6 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
+import LandingPage from '@/components/LandingPage';
+import Albums from '@/components/Albums';
+import AlbumDetails from '@/components/AlbumDetails';
+
 Vue.use(Router);
 
 export default new Router({
@@ -8,17 +12,17 @@ export default new Router({
     {
       path: '/',
       name: 'index',
-      component: require('@/components/LandingPage').default,
+      component: LandingPage,
       children: [
         {
-          path: '/albums',
+          path: 'albums',
           name: 'albums',
-          component: require('@/components/Albums').default,
+          component: Albums,
         },
         {
-          path: '/albums/{id}',
+          path: 'albums/{id}',
           name: 'album_tracks',
-          component: require('@/components/AlbumTracks').default,
+          component: AlbumDetails,
         },
       ],
     },

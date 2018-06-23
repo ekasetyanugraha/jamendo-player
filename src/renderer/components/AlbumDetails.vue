@@ -2,6 +2,12 @@
   <transition name="fade" mode="out-in">
     <div v-if="album">
       <section class="hero is-primary">
+        <a style="margin-left: 24px; margin-top: 24px;" @click.prevent="$router.go(-1)">
+          <span class="icon">
+            <i class="fas fa-chevron-left"></i>
+          </span>
+          <span>Back</span>
+        </a>
         <div class="hero-body">
           <div class="container">
             <div class="columns">
@@ -12,7 +18,7 @@
               </div>
               <div class="column">
                 <h1 class="title">
-                  {{ album.name }}
+                  {{ album.name }} ({{ album.releasedate | year }})
                 </h1>
                 <h2 class="subtitle">
                   {{ album.artist_name }}
@@ -50,6 +56,11 @@
         </tbody>
       </table>
     </div>
+    <div v-else class="has-text-centered">
+      <span class="icon is-large">
+        <i class="fas fa-3x fa-spinner fa-pulse"></i>
+      </span>
+    </div>
   </transition>
 </template>
 
@@ -57,17 +68,17 @@
   import { mapState, mapActions } from 'vuex';
 
   export default {
-    name: 'AlbumTracks',
+    name: 'AlbumDetails',
     computed: {
       albumId() {
         return this.$route.params.id;
       },
       ...mapState({
-        albums: state => state.Album.albumDetails,
+        albumDetails: state => state.Album.albumDetails,
         currentlyPlaying: state => state.Playlist.currentlyPlaying,
       }),
       album() {
-        return this.albums.find(album => album.id === this.albumId);
+        return this.albumDetails.find(album => album.id === this.albumId);
       },
       tracks() {
         if (!this.album) return [];
@@ -76,6 +87,11 @@
     },
     methods: {
       ...mapActions(['getTracksByAlbum', 'play', 'playAll', 'addToQueue']),
+    },
+    filters: {
+      year(val) {
+        return new Date(val).getFullYear();
+      },
     },
     mounted() {
       if (!this.albumId) {

@@ -2,9 +2,7 @@
   <div class="columns">
     <div class="column is-one-fifth">
       <aside class="menu box">
-        <p class="menu-label">
-          Jamendo
-        </p>
+        <p class="menu-label">Jamendo</p>
         <ul class="menu-list">
           <li>
             <router-link to="albums">Albums</router-link>

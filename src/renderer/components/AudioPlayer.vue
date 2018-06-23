@@ -8,11 +8,11 @@
       </div>
       <div style="padding-top: 12px; padding-bottom: 12px;">
         <div class="has-text-centered has-text-weight-bold">{{ currentlyPlaying.name }}</div>
-        <div class="has-text-centered">{{ album.artist_name }}</div>
+        <div class="has-text-centered" style="margin-bottom: 6px;">{{ album.artist_name }}</div>
         <div class="level" style="margin: 0;">
           <div class="level-item has-text-centered">
-            <a class="icon is-large" @click="pause">
-              <i class="fas fa-2x fa-backward"></i>
+            <a class="icon is-large" @click="playPrev">
+              <i class="fas fa-2x fa-angle-double-left"></i>
             </a>
             <a v-show="paused" class="icon is-large" @click="resume">
               <i class="fas fa-3x fa-play-circle"></i>
@@ -21,7 +21,7 @@
               <i class="fas fa-3x fa-pause-circle"></i>
             </a>
             <a class="icon is-large" @click="playNext">
-              <i class="fas fa-2x fa-forward"></i>
+              <i class="fas fa-2x fa-angle-double-right"></i>
             </a>
           </div>
         </div>
@@ -64,7 +64,7 @@
       },
     },
     methods: {
-      ...mapActions(['play', 'playNext', 'playAll']),
+      ...mapActions(['play', 'playPrev', 'playNext', 'playAll']),
       pause() {
         this.paused = true;
       },
