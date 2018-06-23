@@ -36,6 +36,12 @@
       audioElement = document.getElementById('player');
       audioElement.autoplay = true;
       audioElement.addEventListener('ended', this.onEnded);
+      audioElement.addEventListener('pause', () => {
+        this.$emit('paused');
+      });
+      audioElement.addEventListener('play', () => {
+        this.$emit('played');
+      });
       clearInterval(this.interval);
       this.interval = setInterval(() => {
         const { currentTime, duration } = audioElement;
