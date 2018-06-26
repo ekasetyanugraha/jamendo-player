@@ -34,9 +34,13 @@
     methods: {
       ...mapActions(['getAlbums', 'getAlbumTracks']),
       getMoreAlbums() {
-        const app = document.getElementById('app');
-        if ((window.innerHeight + window.pageYOffset) >= app.offsetHeight) {
-          this.getAlbums();
+        if (!this.loading) {
+          const app = document.getElementById('app');
+          if ((window.innerHeight + window.pageYOffset) >= app.offsetHeight) {
+            this.getAlbums().then(() => {
+              this.loading = false;
+            });
+          }
         }
       },
       goToAlbumTracks(albumId) {

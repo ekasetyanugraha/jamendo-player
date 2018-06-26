@@ -20,16 +20,16 @@
         <div class="has-text-centered ellipsis" style="margin-bottom: 6px;">{{ album.artist_name }}</div>
         <div class="level" style="margin: 0;">
           <div class="level-item has-text-centered">
-            <a class="icon is-large" @click="playPrev">
+            <a class="icon has-text-danger is-large" @click="playPrev">
               <i class="fas fa-2x fa-angle-double-left"></i>
             </a>
-            <a v-show="paused" class="icon is-large" @click="resume">
+            <a v-show="paused" class="icon has-text-danger is-large" @click="resume">
               <i class="fas fa-3x fa-play-circle"></i>
             </a>
-            <a v-show="!paused" class="icon is-large" @click="pause">
+            <a v-show="!paused" class="icon has-text-danger is-large" @click="pause">
               <i class="fas fa-3x fa-pause-circle"></i>
             </a>
-            <a class="icon is-large" @click="playNext">
+            <a class="icon has-text-danger is-large" @click="playNext">
               <i class="fas fa-2x fa-angle-double-right"></i>
             </a>
           </div>

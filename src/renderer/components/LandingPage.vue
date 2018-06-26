@@ -1,17 +1,17 @@
 <template>
   <div class="columns">
-    <div class="column is-one-fifth" style="position: fixed; z-index: 1000; width: 200px;">
+    <div class="column is-one-fifth" style="position: fixed; z-index: 1000; width: 300px;">
       <aside class="menu box">
-        <p class="menu-label">Jamendo</p>
+        <img src="/build/icons/jamendo.png"/>
         <ul class="menu-list">
           <li>
-            <router-link to="albums">Albums</router-link>
+            <router-link :class="{'is-active': $route.name === 'albums'}" to="albums">Albums</router-link>
           </li>
         </ul>
       </aside>
       <AudioPlayer />
     </div>
-    <div class="column" style="margin-left: 200px;">
+    <div class="column" style="margin-left: 300px;">
       <transition name="fade" mode="out-in">
         <router-view />
       </transition>

@@ -1,7 +1,7 @@
 <template>
   <transition name="fade" mode="out-in">
     <div v-if="album">
-      <section class="hero is-primary">
+      <section class="hero is-danger">
         <a style="margin-left: 24px; margin-top: 24px;" @click.prevent="$router.go(-1)">
           <span class="icon">
             <i class="fas fa-chevron-left"></i>
@@ -35,7 +35,7 @@
             <th>Title</th>
             <th>Duration</th>
             <th>
-              <a class="button is-link" @click.prevent="playAll(tracks)">
+              <a class="button is-danger is-outlined" @click.prevent="playAll(tracks)">
                 <span>Play All</span>
                 <span class="icon" style="margin-left: 6px;">
                   <i class="fas fa-play"></i>
@@ -45,15 +45,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="track in tracks" :key="track.id" :class="{'is-selected': track.id === currentlyPlaying.id}">
+          <tr v-for="track in tracks" :key="track.id" :class="{'has-background-danger has-text-white': track.id === currentlyPlaying.id}">
             <td>{{ track.position }}</td>
             <td class="ellipsis">{{ track.name }}</td>
             <td>{{ track.duration | digiClock }}</td>
             <td>
-              <a class="icon" @click.prevent="play(track)">
+              <a :class="{'has-text-white': track.id === currentlyPlaying.id, 'has-text-danger': track.id !== currentlyPlaying.id}" class="icon" @click.prevent="play(track)">
                 <i class="fas fa-lg fa-play-circle"></i>
               </a>
-              <a class="icon" @click.prevent="addToQueue(track)">
+              <a :class="{'has-text-white': track.id === currentlyPlaying.id, 'has-text-danger': track.id !== currentlyPlaying.id}" class="icon" @click.prevent="addToQueue(track)">
                 <i class="fas fa-lg fa-plus-circle"></i>
               </a>
             </td>
