@@ -18,9 +18,14 @@ function createWindow() {
    * Initial window options
    */
   mainWindow = new BrowserWindow({
-    height: 768,
-    useContentSize: true,
     width: 1366,
+    height: 768,
+    minWidth: 768,
+    minHeight: 768,
+    useContentSize: true,
+    frame: false,
+    title: 'Jamendo Player',
+    titleBarStyle: 'hidden',
   });
 
   mainWindow.loadURL(winURL);

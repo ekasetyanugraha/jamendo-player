@@ -8,7 +8,7 @@
       </div>
       <progress
         :value="progress"
-        class="progress is-primary is-small"
+        class="progress is-danger is-small"
         max="100"
         style="height: 6px; border-radius: 0; margin: 0;"
         />

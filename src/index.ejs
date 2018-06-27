@@ -10,9 +10,23 @@
         require('module').globalPaths.push('<%= htmlWebpackPlugin.options.nodeModules.replace(/\\/g, '\\\\') %>')
       </script>
     <% } %>
+    <style>
+      #navigation {
+        position: fixed;
+        width: 100%;
+        -webkit-app-region: drag;
+      }
+    </style>
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
   </head>
   <body>
+    <nav class="navbar is-light" id="navigation" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/albums">
+          <img src="/build/icons/jamendo.png" alt="Jamendo Player">
+        </a>
+      </div>
+    </nav>
     <div id="app"></div>
     <!-- Set `__static` path to static files in production -->
     <script>

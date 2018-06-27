@@ -1,7 +1,7 @@
 <template>
   <transition name="fade" mode="out-in">
     <div class="columns is-multiline" v-if="albums.length">
-      <div v-for="album in albums" :key="album.id" class="column is-one-fifth">
+      <div v-for="album in albums" :key="album.id" class="column is-one-fifth is-mobile">
         <div class="card">
           <div class="card-image">
             <a @click.prevent="goToAlbumTracks(album.id)">
