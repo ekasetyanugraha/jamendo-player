@@ -2,21 +2,20 @@
 
 > A music player based on Vue and Electron
 
-#### Build Setup
+#### Setup :
 
+#### 1. Install Dependencies
 ``` bash
-# install dependencies
+# if you have yarn installed, use :
+yarn
+# or
 npm install
 
-# serve with hot reload at localhost:9080
+```
+
+#### 1. Start app
+``` bash
 npm run dev
-
-# build electron application for production
-npm run build
-
-
-# lint all JS/Vue component files in `src/`
-npm run lint
 
 ```
 
