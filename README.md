@@ -7,14 +7,18 @@
 #### 1. Install Dependencies
 ``` bash
 # if you have yarn installed, use :
-yarn
+yarn install
+
 # or
 npm install
 
 ```
 
-#### 1. Start app
+#### 2. Start app
 ``` bash
+yarn run dev
+
+# or
 npm run dev
 
 ```
